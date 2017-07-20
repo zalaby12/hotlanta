@@ -1,3 +1,6 @@
+package hotlanta;
+
+
 import java.util.*;
 
 public class Editor {
