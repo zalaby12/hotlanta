@@ -1,29 +1,39 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class GitHub {
 
-	ArrayList<ModifiedFile> files;
-    ArrayList<ModifiedFile> modifiedFiles;
+	private List<ModifiedFile> files;
+    private List<ModifiedFile> modifiedFiles;
 	
 	public GitHub() {
-		files = new ArrayList<>();
-        modifiedFiles = new ArrayList<>();
+		this.files = new ArrayList<>();
+        this.modifiedFiles = new ArrayList<>();
 	}
+
+    public GitHub(List<ModifiedFile> modifiedFiles) {
+        this.files = new ArrayList<>();
+        this.modifiedFiles = modifiedFiles;
+    }
+
+    public void setModifiedFileList(List<ModifiedFile> modifiedFiles) {
+        this.modifiedFiles = modifiedFiles;
+    }
 	
 	public void addCompleteList(ModifiedFile s) {
-		files.add(s);
+		this.files.add(s);
 	}
 	
 	public void removeCompleteList(ModifiedFile s) {
-		files.remove(s);
+		this.files.remove(s);
 	}
 	
 	public void addModify(ModifiedFile s) {
-		modifiedFiles.add(s);
+		this.modifiedFiles.add(s);
 	}
 	
 	public void removeModify(ModifiedFile s) {
-		modifiedFiles.remove(s);
+		this.modifiedFiles.remove(s);
 	}
 	
 	public boolean contains(String fileName) {

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+(cd ./Resources/anotherUser/ ; git status > ./../../anotherGitStatus.txt; git config user.name > ./../../anotherUserGitCredentials.txt; git config user.email >> ./../../anotherUserGitCredentials.txt)
+
 git status > gitStatus.txt
 
 git config user.name > gitCredentials.txt 
@@ -10,4 +12,6 @@ javac Main.java
 
 java Main
 
+#cleanup
 rm *.class
+rm *.txt
