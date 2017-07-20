@@ -1,13 +1,13 @@
-package hotlanta;
-
 import java.util.ArrayList;
 
 public class GitHub {
 
-	ArrayList<String> files;
+	ArrayList<ModifiedFile> files;
+    ArrayList<ModifiedFile> modifiedFiles;
 	
 	public GitHub() {
 		files = new ArrayList<>();
+        modifiedFiles = new ArrayList<>();
 	}
 	
 	public void add(String s) {
