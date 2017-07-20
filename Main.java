@@ -1,5 +1,3 @@
-package hotlanta;
-
 public class Main {
 
     private static GitHub githubSimulator;

@@ -1,5 +1,3 @@
-package hotlanta;
-
 import java.util.ArrayList;
 
 public class GitHub {
@@ -57,6 +55,7 @@ public class GitHub {
 		return toReturn;
 	}
 	
+    //TODO this should take an Editor, I think... and then contact them somehow? not sure. 
 	public void notify(String... s) {
 		
 		System.out.println("Files Changed");

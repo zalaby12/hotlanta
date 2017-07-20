@@ -1,5 +1,3 @@
-package hotlanta;
-
 import java.io.File;
 import java.util.*;
 
