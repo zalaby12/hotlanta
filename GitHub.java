@@ -12,12 +12,20 @@ public class GitHub {
         modifiedFiles = new ArrayList<>();
 	}
 	
-	public void add(ModifiedFile s) {
+	public void addCompleteList(ModifiedFile s) {
 		files.add(s);
 	}
 	
-	public void remove(ModifiedFile s) {
+	public void removeCompleteList(ModifiedFile s) {
 		files.remove(s);
+	}
+	
+	public void addModify(ModifiedFile s) {
+		modifiedFiles.add(s);
+	}
+	
+	public void removeModify(ModifiedFile s) {
+		modifiedFiles.remove(s);
 	}
 	
 	public boolean contains(ModifiedFile s) {
@@ -28,7 +36,7 @@ public class GitHub {
 	
 		String toReturn = "";
 		
-		for (ModifiedFile s : files) {
+		for (ModifiedFile s : modifiedFiles) {
 			toReturn += s + "\n";
 		}
 		
