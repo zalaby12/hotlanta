@@ -28,8 +28,22 @@ public class GitHub {
 		modifiedFiles.remove(s);
 	}
 	
-	public boolean contains(ModifiedFile s) {
-		return modifiedFiles.contains(s);
+	public boolean contains(String fileName) {
+		for (ModifiedFile s : modifiedFiles) {
+			if (s.getName().equals(fileName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ModifiedFile get(String fileName) {
+		for (ModifiedFile s : modifiedFiles) {
+			if (s.getName().equals(fileName)) {
+				return s;
+			}
+		}
+		return null;
 	}
 	
 	public String toString() {
