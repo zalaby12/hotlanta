@@ -45,7 +45,3 @@ public static void main(String[] args) {
 	}
 
 }
-
-public enum ModificationType {
-	CHANGED, DELETED, ADDED
-}
