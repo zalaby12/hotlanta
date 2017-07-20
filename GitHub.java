@@ -1,3 +1,5 @@
+package hotlanta;
+
 import java.util.ArrayList;
 
 public class GitHub {
@@ -10,19 +12,23 @@ public class GitHub {
         modifiedFiles = new ArrayList<>();
 	}
 	
-	public void add(String s) {
+	public void add(ModifiedFile s) {
 		files.add(s);
 	}
 	
-	public void remove(String s) {
+	public void remove(ModifiedFile s) {
 		files.remove(s);
+	}
+	
+	public boolean contains(ModifiedFile s) {
+		return modifiedFiles.contains(s);
 	}
 	
 	public String toString() {
 	
 		String toReturn = "";
 		
-		for (String s : files) {
+		for (ModifiedFile s : files) {
 			toReturn += s + "\n";
 		}
 		
