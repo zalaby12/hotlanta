@@ -2,6 +2,10 @@
 
 git status > gitStatus.txt
 
+git config user.name > gitCredentials.txt 
+
+git config user.email >> gitCredentials.txt
+
 javac Main.java 
 
 java Main
