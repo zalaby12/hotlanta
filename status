@@ -2,4 +2,8 @@
 
 git status > gitStatus.txt
 
-#java Main.java
+javac Main.java 
+
+java Main
+
+rm *.class
