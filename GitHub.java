@@ -29,5 +29,14 @@ public class GitHub {
 		return toReturn;
 	}
 	
+	public void notify(String... s) {
+		
+		System.out.println("Files Changed");
+		
+		for (String st : s ) {
+			System.out.println(st);
+		}
+	}
+	
 	
 }
