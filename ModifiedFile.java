@@ -14,7 +14,7 @@ public class ModifiedFile extends File {
        return edits;
     }
 
-    public void updtateEdits(String name, String email, Date time ) {
+    public void updateEdits(String name, String email, Date time ) {
         Editor e = new Editor(name, email, time);
         this.edits.addFirst(e);
     }
