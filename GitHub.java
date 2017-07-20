@@ -30,8 +30,15 @@ public class GitHub {
 	
 	public void addModify(ModifiedFile s) {
 		this.modifiedFiles.add(s);
+        //TODO -> check if files coming in exist already
 	}
+
+    //TODO -> take in an arraylist of modified files
 	
+    public void addFiles() {
+        System.out.println("nothing");
+    }
+
 	public void removeModify(ModifiedFile s) {
 		this.modifiedFiles.remove(s);
 	}

@@ -1,3 +1,3 @@
-public enum ModificationType {
+public enum ModifiedType {
 	CHANGED, DELETED, ADDED
 }

@@ -1,4 +1,10 @@
-public class ParseStatus() {
+import java.nio.file.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
+import java.util.Date;
+
+public class ParseStatus {
 
 	private Path status;
 	private Path credentials;
@@ -11,38 +17,40 @@ public class ParseStatus() {
 	}
 
 	private void readFile() {
-		try (InputStream in Files.newInputStream(status);
-		BufferedReader statusReader = new BufferedReader(new InputStreamReader(in))) {
+		try {
+            InputStream in  = Files.newInputStream(status);
+	    	BufferedReader statusReader = new BufferedReader(new InputStreamReader(in));
 			String line = null;
 			Boolean untracked = false;
 			while ((line = statusReader.readLine()) != null) {
 				String fileName = null;
-				ModificationType modificationType = null;
+				ModifiedType modificationType;
 				ModifiedFile modifiedFile;
 				if (line.contains("modified")) {
 					fileName = line.split(":")[1];
-					modificationType = ModificationType.CHANGED;
+					modificationType = ModifiedType.CHANGED;
 				} else if (line.contains("deleted")) {
 					fileName = line.split(":")[1];
-					modificationType = ModificationType.DELETED;
+					modificationType = ModifiedType.DELETED;
 				} else if (line.contains("Untracked files")) {
 					untracked = true;
 				} else if (untracked) {
 					fileName = line;
-					modificationType = ModificationType.ADDED;
+					modificationType = ModifiedType.ADDED;
 				}
 				if (fileName != null) {
 					modifiedFile = new ModifiedFile(fileName);
 					String name;
 					String userName;
-					try (InputStream in Files.newInputStream(credentials);
-						BufferedReader credentialReader = new BufferedReader(new InputStreamReader(in))) {
+					try {
+                        InputStream inCredentials  = Files.newInputStream(credentials);
+						BufferedReader credentialReader = new BufferedReader(new InputStreamReader(inCredentials));
 						name = credentialReader.readLine();
 						userName = credentialReader.readLine();
 					} catch (IOException e) {
-						System.err.println(x);
+                        e.printStackTrace();
 					}
-					modifiedFile.updateEdits(name, userName, System.currentTimeMillis());
+					modifiedFile.updateEdits(name, userName, new Date());
 					modifiedFiles.add(modifiedFile);
 				}
 			}
@@ -51,7 +59,7 @@ public class ParseStatus() {
 		}
 	}
 
-	public ArrayList<ModifiedFile> getModifiedFiles() {
+	public List<ModifiedFile> getModifiedFiles() {
 		return modifiedFiles;
 	}
 	

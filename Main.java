@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Main {
 
     private static GitHub githubSimulator;
@@ -10,20 +12,27 @@ public class Main {
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-        CURRENT_DIRECTORY = System.getProperty("user.dir");
+        initSimAndUpdateCurrentDirectory();
 
-        githubSimulator = new GitHub();
-    
         populateGithubSimulator();
 
-    }
+        updateGitHubWithNecessaryChanges();
 
-    private static void populateGithubSimulator(String arg) {
-//        githubSimulator.add(new ModifiedFile
     }
 
     private static void populateGithubSimulator() {
-        populateGithubSimulator(null);
+        githubSimulator.addFiles();
+        List<ModifiedFile> anotherUserModifiedFiles = new ParseStatus("anotherGitStatus.txt", "anotherUserGitCredentials.txt").getModifiedFiles();
     }
 
+    private static void initSimAndUpdateCurrentDirectory() {
+        CURRENT_DIRECTORY = System.getProperty("user.dir");
+        githubSimulator = new GitHub();
+    }
+
+    private static void updateGitHubWithNecessaryChanges() {
+        List<ModifiedFile> myModifiedFiles = new ParseStatus("gitStatus.txt", "gitCredentials.txt").getModifiedFiles();
+        //pass the files to GitHub and let it do it's thing
+    }
+    
 }
