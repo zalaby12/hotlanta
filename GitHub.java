@@ -8,10 +8,12 @@ public class GitHub {
 
 	private List<ModifiedFile> files;
     private List<ModifiedFile> modifiedFiles;
-	
+	private boolean hasHadCollision;
+
 	public GitHub() {
 		this.files = new ArrayList<>();
         this.modifiedFiles = new ArrayList<>();
+        hasHadCollision = false;
 	}
 
     public GitHub(List<ModifiedFile> modifiedFiles) {
@@ -35,10 +37,12 @@ public class GitHub {
 		if (!this.contains(s.getPath())) {
 			this.modifiedFiles.add(s);
 		} else {
+			hasHadCollision = true;
             ModifiedFile matching = this.getMatchingModifiedFileFor(s);
             if(matching != null) {
                 matching.updateEdits(s.lastEditorName(), s.lastEditorEmail(), s.lastTimeModified());
             }
+            this.notifyEditors(matching.getEdits(), matching);
 		}
 	}
 
@@ -55,10 +59,6 @@ public class GitHub {
         for(ModifiedFile file : modifiedFiles) {
             this.addModify(file);
         }
-    }
-	
-    public void addFiles() {
-        System.out.println("nothing");
     }
 
 	public void removeModify(ModifiedFile s) {
@@ -117,7 +117,8 @@ public class GitHub {
 	}
 
 	private void sendEmail(String fileName, String editorName, String editorEmail, String timeModified) {
-		String fromName = "gitsmart@ibm.com";
+		printNotification(fileName, editorName, editorEmail);
+		String fromName = "zach.halaby@google.com";
 		String host = "localhost";
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smpt.host", host);
@@ -133,6 +134,15 @@ public class GitHub {
 		} catch (MessagingException x) {
 			x.printStackTrace();
 		}
+	}
+
+	public boolean hasHadFileOverlap() {
+		return this.hasHadCollision;
+	}
+
+	private void printNotification(String fileName, String editorName, String editorEmail) {
+		System.out.println("notifying " + editorName + " that " + fileName + " is also being modified by another user. " +
+				"Sending email to " + editorEmail);
 	}
 	
 	

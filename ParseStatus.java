@@ -14,6 +14,7 @@ public class ParseStatus {
 		status = Paths.get(statusFile);
 		credentials = Paths.get(credentialsFile);
 		modifiedFiles = new ArrayList<>();
+		readFile();
 	}
 
 	private void readFile() {
@@ -40,8 +41,8 @@ public class ParseStatus {
 				}
 				if (fileName != null) {
 					modifiedFile = new ModifiedFile(fileName);
-					String name;
-					String userName;
+					String name = "";
+					String userName = "";
 					try {
                         InputStream inCredentials  = Files.newInputStream(credentials);
 						BufferedReader credentialReader = new BufferedReader(new InputStreamReader(inCredentials));
