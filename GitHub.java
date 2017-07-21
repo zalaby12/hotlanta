@@ -1,6 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.io.File;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 public class GitHub {
 
@@ -30,7 +32,7 @@ public class GitHub {
 	}
 	
 	public void addModify(ModifiedFile s) {
-		if (!contains(s.getPath()) {
+		if (!this.contains(s.getPath())) {
 			this.modifiedFiles.add(s);
 		} else {
 
@@ -85,12 +87,12 @@ public class GitHub {
 	}
 	
     //TODO this should take an Editor, I think... and then contact them somehow? not sure. 
-	public void notifyEditors(ArrayList<Editor> editors) {
+	public void notifyEditors(List<Editor> editors, ModifiedFile mutuallyModifiedFile) {
 		
 		System.out.println("Files Changed");
 		
-		for (String st : s ) {
-			System.out.println(st);
+		for (Editor editor : editors) {
+            this.sendEmail(mutuallyModifiedFile.getPath(), editor.getName(), editor.getEmail(), editor.getTimestamp().toString());
 		}
 	}
 
@@ -106,14 +108,10 @@ public class GitHub {
 		}
 	}
 
-	private void sendEmail(ModifiedFile file) {
-		String fileName = file.getPath();
-		String editorName = file.lastEditorName();
-		String editorEmail = file.lastEditorEmail();
-		String timeModified = file.lastTimeModified();
+	private void sendEmail(String fileName, String editorName, String editorEmail, String timeModified) {
 		String fromName = "gitsmart@ibm.com";
 		String host = "localhost";
-		Properties properties = System.properties();
+		Properties properties = System.getProperties();
 		properties.setProperty("mail.smpt.host", host);
 		Session session = Session.getDefaultInstance(properties);
 		try {

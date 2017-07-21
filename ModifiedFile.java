@@ -2,40 +2,41 @@ import java.io.File;
 import java.util.*;
 
 public class ModifiedFile extends File {
-    private LinkedList<Editor> edits;
+    private List<Editor> edits;
 
     //constructor
     public ModifiedFile(String pathname) {
         super(pathname);
-        edits = new LinkedList<Editor>();
+        edits = new ArrayList<Editor>();
     }
 
-    public LinkedList<Editor> getEdits() {
+    public List<Editor> getEdits() {
        return edits;
     }
 
     public void updateEdits(String name, String email, Date time ) {
         Editor e = new Editor(name, email, time);
-        this.edits.addFirst(e);
+        this.edits.add(e);
     }
 
-    public Editor getMostRecentEditor(){
+    /*public Editor getMostRecentEditor(){
         return edits.getFirst();
-    }
-    public Date lastTimeModified(){
+    }*/
+
+    /*public Date lastTimeModified(){
         Editor e = getMostRecentEditor();
         return e.getTimestamp();
 
-    }
+    }*/
 
-    public String lastEditorName() {
+    /*public String lastEditorName() {
         Editor e = getMostRecentEditor();
         return e.getName();
-    }
+    }*/
 
-    public String lastEditorEmail() {
+    /*public String lastEditorEmail() {
         Editor e = getMostRecentEditor();
         return e.getEmail();
-    }
+    }*/
 
 }
