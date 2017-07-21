@@ -81,6 +81,18 @@ public class GitHub {
 			System.out.println(st);
 		}
 	}
+
+	public void populate(File file) {
+		if (!file.isDirectory) {
+			ModifiedFile newFile = new ModifiedFile(file.getPath()); 
+			addModify(newFile);
+		} else {
+			File[] children = file.listFiles();
+			for (File f : children) {
+				populate(f);
+			}
+		}
+	}
 	
 	
 }
