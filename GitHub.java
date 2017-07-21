@@ -118,14 +118,28 @@ public class GitHub {
 
 	private void sendEmail(String fileName, String editorName, String editorEmail, String timeModified) {
 		printNotification(fileName, editorName, editorEmail);
-		String fromName = "zach.halaby@google.com";
-		String host = "localhost";
+		String userName = "zach.halaby@gmail.com";
+		String password = "Red2()14";
 		Properties properties = System.getProperties();
-		properties.setProperty("mail.smpt.host", host);
-		Session session = Session.getDefaultInstance(properties);
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.username", userName);
+		properties.setProperty("mail.password", password);
+		properties.setProperty("mail.defaultEncoding", "UTF-8");
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.starttls.required", "true");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(userName, password);
+			}
+		});
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(fromName));
+			message.setFrom(new InternetAddress(userName));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(editorEmail));
 			message.setSubject("Warning: possible merge conflict in" + fileName);
 			message.setText("Hello, " + editorName + ". You are currently working on a file that is being edited by another developer.");
