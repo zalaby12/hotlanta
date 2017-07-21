@@ -30,7 +30,12 @@ public class GitHub {
 	}
 	
 	public void addModify(ModifiedFile s) {
-		this.modifiedFiles.add(s);
+		if (!contains(s.getPath()) {
+			this.modifiedFiles.add(s);
+		} else {
+
+		}
+		
         //TODO -> check if files coming in exist already
 	}
 
@@ -80,7 +85,7 @@ public class GitHub {
 	}
 	
     //TODO this should take an Editor, I think... and then contact them somehow? not sure. 
-	public void notify(String... s) {
+	public void notifyEditors(ArrayList<Editor> editors) {
 		
 		System.out.println("Files Changed");
 		
@@ -98,6 +103,29 @@ public class GitHub {
 			for (File f : children) {
 				populate(f);
 			}
+		}
+	}
+
+	private void sendEmail(ModifiedFile file) {
+		String fileName = file.getPath();
+		String editorName = file.lastEditorName();
+		String editorEmail = file.lastEditorEmail();
+		String timeModified = file.lastTimeModified();
+		String fromName = "gitsmart@ibm.com";
+		String host = "localhost";
+		Properties properties = System.properties();
+		properties.setProperty("mail.smpt.host", host);
+		Session session = Session.getDefaultInstance(properties);
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(fromName));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(editorEmail));
+			message.setSubject("Warning: possible merge conflict in" + fileName);
+			message.setText("Hello, " + editorName + ". You are currently working on a file that is being edited by another developer.");
+			Transport.send(message);
+			System.out.println("Sent message successfully");
+		} catch (MessagingException x) {
+			x.printStackTrace();
 		}
 	}
 	
