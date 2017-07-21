@@ -19,24 +19,24 @@ public class ModifiedFile extends File {
         this.edits.add(e);
     }
 
-    /*public Editor getMostRecentEditor(){
-        return edits.getFirst();
-    }*/
+    public Editor getMostRecentEditor(){
+        return edits.get(0);
+    }
 
-    /*public Date lastTimeModified(){
+    public Date lastTimeModified(){
         Editor e = getMostRecentEditor();
         return e.getTimestamp();
 
-    }*/
+    }
 
-    /*public String lastEditorName() {
+    public String lastEditorName() {
         Editor e = getMostRecentEditor();
         return e.getName();
-    }*/
+    }
 
-    /*public String lastEditorEmail() {
+    public String lastEditorEmail() {
         Editor e = getMostRecentEditor();
         return e.getEmail();
-    }*/
+    }
 
 }

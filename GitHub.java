@@ -35,17 +35,25 @@ public class GitHub {
 		if (!this.contains(s.getPath())) {
 			this.modifiedFiles.add(s);
 		} else {
-
+            ModifiedFile matching = this.getMatchingModifiedFileFor(s);
+            if(matching != null) {
+                matching.updateEdits(s.lastEditorName(), s.lastEditorEmail(), s.lastTimeModified());
+            }
 		}
-		
-        //TODO -> check if files coming in exist already
 	}
 
-    //TODO -> take in an arraylist of modified files
-    
+    public ModifiedFile getMatchingModifiedFileFor(ModifiedFile toCompare) {
+        for(ModifiedFile editedFiles : modifiedFiles) {
+            if(editedFiles.getPath().equals(toCompare.getPath())) {
+                return editedFiles;
+            }
+        }
+        return null;
+    }
+
     public void addModifiedFileList(List<ModifiedFile> modifiedFiles) {
         for(ModifiedFile file : modifiedFiles) {
-            this.modifiedFiles.add(file);
+            this.addModify(file);
         }
     }
 	
