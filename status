@@ -8,10 +8,10 @@ git config user.name > gitCredentials.txt
 
 git config user.email >> gitCredentials.txt
 
-#javac -cp .:./jaf-1.1.1/activation.jar:./javamail-1.2/mail.jar Main.java 
+javac -cp .:./jaf-1.1.1/activation.jar:./javamail-1.2/mail.jar Main.java 
 
-#java Main
+java -cp .:./jaf-1.1.1/activation.jar:./javamail-1.2/mail.jar Main
 
 #cleanup
-#rm *.class
-#rm *.txt
+rm *.class
+rm *.txt

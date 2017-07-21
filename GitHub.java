@@ -118,8 +118,8 @@ public class GitHub {
 
 	private void sendEmail(String fileName, String editorName, String editorEmail, String timeModified) {
 		printNotification(fileName, editorName, editorEmail);
-		String userName = "zach.halaby@gmail.com";
-		String password = "Red2()14";
+		String userName = "git.smart.ibm@gmail.com";
+		String password = "THESAFESTPASSWORD";
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
 		properties.setProperty("mail.username", userName);
@@ -130,7 +130,7 @@ public class GitHub {
 		properties.setProperty("mail.smtp.starttls.enable", "true");
 		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.port", "465");
 		properties.setProperty("mail.smtp.socketFactory.port", "465");
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -142,7 +142,7 @@ public class GitHub {
 			message.setFrom(new InternetAddress(userName));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(editorEmail));
 			message.setSubject("Warning: possible merge conflict in" + fileName);
-			message.setText("Hello, " + editorName + ". You are currently working on a file that is being edited by another developer.");
+			message.setText("Hello, " + editorName + ". You are currently working on a file (" + fileName.trim() +") that is being edited by another developer.");
 			Transport.send(message);
 			System.out.println("Sent message successfully");
 		} catch (MessagingException x) {
