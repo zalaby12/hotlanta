@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
 public class GitHub {
 
@@ -34,6 +35,12 @@ public class GitHub {
 	}
 
     //TODO -> take in an arraylist of modified files
+    
+    public void addModifiedFileList(List<ModifiedFile> modifiedFiles) {
+        for(ModifiedFile file : modifiedFiles) {
+            this.modifiedFiles.add(file);
+        }
+    }
 	
     public void addFiles() {
         System.out.println("nothing");
@@ -83,7 +90,7 @@ public class GitHub {
 	}
 
 	public void populate(File file) {
-		if (!file.isDirectory) {
+		if (!file.isDirectory()) {
 			ModifiedFile newFile = new ModifiedFile(file.getPath()); 
 			addModify(newFile);
 		} else {

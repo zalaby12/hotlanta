@@ -32,7 +32,7 @@ public class Main {
 
     private static void updateGitHubWithNecessaryChanges() {
         List<ModifiedFile> myModifiedFiles = new ParseStatus("gitStatus.txt", "gitCredentials.txt").getModifiedFiles();
-        //pass the files to GitHub and let it do it's thing
+        githubSimulator.addModifiedFileList(myModifiedFiles);
     }
     
 }
